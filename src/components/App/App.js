@@ -1,18 +1,20 @@
-import React, { useState } from "react";
-import {
-  Container,
-  GlobalStyle,
-} from './App.css';
+import React, { useState, createContext } from "react";
+import { Container } from "./App.css";
 
-import ClientComponent from "../ClientComponent/ClientComponent";
-import { Login } from '..';
+// import ClientComponent from "../ClientComponent/ClientComponent";
+import { Login, GroupChat } from "..";
 
-function App() {
-  const [loadClient, setLoadClient] = useState(true);
+export const AppContext = createContext();
+
+const AppProvider = () => {
+  // const [loadClient, setLoadClient] = useState(true);
+  const [user, setUser] = useState(false);
   return (
-    <Container>
-      <Login/>
-    </Container>
+    <AppContext.Provider value={{ user, setUser }}>
+      <Container>
+        {!user ? <Login setUser={setUser} /> : <GroupChat user={user}/>}
+      </Container>
+    </AppContext.Provider>
     // <>
     //   {/* LOAD OR UNLOAD THE CLIENT */}
     //   <button onClick={() => setLoadClient(prevState => !prevState)}>
@@ -22,6 +24,6 @@ function App() {
     //   {loadClient ? <ClientComponent /> : <Login/>}
     // </>
   );
-}
+};
 
-export default App;
+export default AppProvider;
