@@ -1,37 +1,59 @@
 const express = require('express');
-require('dotenv').config();
+const bodyParser = require("body-parser");
 const http = require("http");
 const socketIo = require("socket.io");
+const routes = require('./routes');
+const Chat = require("./models/Chat");
+const db = require("./db");
 
-const port = process.env.PORT || 3001;
-const index = require('./routes');
+require('dotenv').config();
 
+const port = process.env.BACKEND_PORT || 3001;
 const app = express();
-app.use(index);
+
+app.use(bodyParser.json());
+app.use(routes);
 
 
 const server = http.createServer(app);
 
-const io = socketIo(server); // < Interesting!
+const socket = socketIo(server);
 
-let interval;
+//setup event listener
+socket.on("connection", socket => {
+  console.log("user connected");
 
-io.on("connection", (socket) => {
-  console.log("New client connected");
-  if (interval) {
-    clearInterval(interval);
-  }
-  interval = setInterval(() => getApiAndEmit(socket), 1000);
-  socket.on("disconnect", () => {
-    console.log("Client disconnected");
-    clearInterval(interval);
+  socket.on("disconnect", function() {
+    console.log("user disconnected");
+  });
+
+  //Someone is typing
+  socket.on("typing", data => {
+    socket.broadcast.emit("notifyTyping", {
+      user: data.user,
+      message: data.message
+    });
+  });
+
+  //when soemone stops typing
+  socket.on("stopTyping", () => {
+    socket.broadcast.emit("notifyStopTyping");
+  });
+
+  socket.on("chat message", function(msg) {
+    console.log("message: " + msg);
+
+    //broadcast message to everyone in port:5000 except yourself.
+    socket.broadcast.emit("received", { message: msg });
+
+    //save chat to the database
+    db.then(dbase => {
+      console.log("connected correctly to the server");
+      let chatMessage = new Chat({ message: msg, sender: "Anonymous" });
+
+      chatMessage.save();
+    });
   });
 });
-
-const getApiAndEmit = socket => {
-  const response = new Date();
-  // Emitting a new message. Will be consumed by the client
-  socket.emit("FromAPI", response);
-};
 
 server.listen(port, () => console.log(`Listening on port ${port}`));

@@ -2,6 +2,7 @@
   "name": "group-chat",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:${BACKEND_PORT}",
   "dependencies": {
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
@@ -23,7 +24,8 @@
     "server": "nodemon ./server/index.js",
     "dev": "run-p server start",
     "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "node env-dependencies.js"
   },
   "eslintConfig": {
     "extends": "react-app"
