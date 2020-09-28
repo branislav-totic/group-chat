@@ -2,7 +2,7 @@ import styled from "styled-components/macro";
 import { colors } from "../../style";
 const { color } = colors;
 
-export const Container = styled.div`
+export const Container = styled.aside`
   background: ${color(`black`)};
   width: 22.5%;
   height: 100%;

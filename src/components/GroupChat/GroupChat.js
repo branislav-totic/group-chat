@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AppContext } from '../App/App';
 import PropTypes from 'prop-types';
-import { Messeges, Channels } from '..';
+import { Messages, Channels } from '..';
 import { Root } from './GroupChat.css';
 
 const GroupChat = ({ user }) => {
@@ -18,7 +18,7 @@ const GroupChat = ({ user }) => {
   return (
     <Root>
       <Channels/>
-      <Messeges/>
+      <Messages/>
     </Root>
   );
 };
