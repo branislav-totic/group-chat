@@ -34,9 +34,14 @@ export const Send = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: opacity 0.3s ease-in-out;
 
   svg {
     width: 16px;
     height: 16px;
+  }
+
+  &:hover {
+    opacity: 0.8;
   }
 `;

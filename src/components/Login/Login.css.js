@@ -1,7 +1,7 @@
-import styled from "styled-components/macro";
-import { util, colors } from "../../style";
+import styled from 'styled-components/macro';
+import { util, colors } from '../../style';
 
-const { Button, Link } = util;
+const { Button, Link, Input: OriginalInput } = util;
 const { color } = colors;
 
 export const Container = styled.div`
@@ -32,25 +32,11 @@ export const Form = styled.form`
   flex-direction: column;
 `;
 
-export const Input = styled.input`
-  border-radius: 8px;
-  box-sizing: border-box;
-  border: 1px solid ${color(`gray-light`)};
-  font-size: 1rem;
+export const Input = styled(OriginalInput)`
   margin-bottom: 1rem;
-  padding: 0.8125rem;
 
   &:last-of-type {
     margin-bottom: 1.375rem;
-  }
-
-  &::placeholder {
-    color: ${color(`gray-light`)};
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 3px 2px ${color(`gray`)};
   }
 `;
 
