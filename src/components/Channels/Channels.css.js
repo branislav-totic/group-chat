@@ -18,14 +18,46 @@ export const User = styled.div`
   background: ${color(`black`)};
 `;
 
+export const HeaderWrapper = styled.div`
+  display: flex;  
+  padding: 0.9rem 1.875rem;
+  align-items: center;
+`;
+
+export const AddNew = styled.span`
+  display: flex;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: ${color(`black-medium`)};
+  margin-left: auto;
+  font-size: 14px;
+  padding: 8.5px 9px;
+  box-shadow: 0px 0px 0px 1px transparent;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  svg {
+    height: 14px;
+    width: 14px;
+    stroke-width: 2px;
+    fill: ${color(`white`)};
+    path {
+      stroke: ${color(`white`)};
+    }
+  }
+
+  &:hover {
+    background-color: ${color(`black-light`)};
+    box-shadow: 0px 0px 0px 1px white;
+  }
+`;
+
 export const Header = styled.div`
-  padding: 1.25rem 2rem 1rem 1rem;
   font-weight: bold;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const ContentWrapper = styled.div`
-  padding: 1.25rem 1.875rem;
+  padding: 1.25rem 1.875rem 0 1.875rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -88,7 +120,7 @@ export const ChannelsWrapper = styled.div`
   flex-direction: column;
   position: relative;
   overflow: auto;
-  height: 625px;
+  height: 675px;
   ${scroll}
 `;
 
@@ -123,7 +155,37 @@ export const ChannelName = styled.span`
   font-weight: bold;
 `;
 
-export const Footer = styled.div`
-  height: 72px;
+export const FooterWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.875rem;
   background: ${color(`black-dark`)};
+`;
+
+export const Footer = styled.div`
+`;
+
+export const FooterIcon = styled.span`
+  border-radius: 8px;
+  margin-right: 28px;
+  height: 42px;
+  width: 42px;
+  background-image: url(${({image}) => image});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+`;
+
+export const FooterDropdown = styled.span`
+  
+  svg {
+    transition: transform 0.2s ease-in-out;
+    fill: ${color(`white`)};
+  }
+
+  &:hover {
+    svg {
+      transform: rotate(180deg);
+    }
+  }
 `;
