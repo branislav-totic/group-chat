@@ -110,7 +110,7 @@ const Channels = () => {
       </ContentWrapper>
 
       <FooterWrapper>
-        <FooterIcon image="https://s3-alpha-sig.figma.com/img/1035/123a/bbcc8da69647a2c109cee000d9cda98f?Expires=1606089600&Signature=RD7AQgmeGqh3WhQSIA6XR1r8OFRCbki6XXyemod7GmbeH7jaYBpv09-yAUphK9kNX4c4GucgC31Ym8peMBnQGq3oC9cwuguBU5mCCgFUpPa4Bg1nqQawjDPvDX2OFCobCtCuLhwVjZZTw4~KIOwlKsjffzLkTDWTPWgUg8GpSd5pQkcJELQqP4N8jFb4WOwCJ45VRwQVJhUbNzeaolaCBmML8CezM-uSvLYYEakDdlJzwOX94OY14I3m~q7KskpG4VQ4KLQxUIJ2OW097EoIE63Zo6fKw5-QqSSjngPqcIntaOmS2eK~a7WhuTlkDPOnpl-BKZoaO6GLFquvdgU18w__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA" />
+        <FooterIcon image="assets/images/3b9735f2ac6ac459b44dd6fa1b8a771b.png" />
         <Footer>Xanthe Neal</Footer>
         <FooterDropdown><DownarrowSVG /></FooterDropdown>
       </FooterWrapper>

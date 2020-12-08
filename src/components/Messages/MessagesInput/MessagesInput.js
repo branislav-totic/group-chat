@@ -1,43 +1,52 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import emoji from 'node-emoji';
+import { replaceEmoticons } from 'emoticon-to-emoji';
 import { Container, Input, Send } from './MessagesInput.css';
 import { ReactComponent as SendSVG } from '../../../assets/images/send-white.svg';
 
-const MessagesInput = () => {
-  const [msg, setMsg] = useState('');
+const MessagesInput = ({
+  setMessages,
+}) => {
   const ref = useRef();
+  const [ message, setMessage ] = useState(``);
 
   const handleInputSend = (e) => {
     if (e.key === 'Enter' || e.keyCode === 13) {
       // send msg
-      e.target.value = '';
+      setMessages((messages)=>([...messages, message]))
+      setMessage(``)
     }
-  }
+  };
 
   const handleSend = () => {
     // send msg
-  }
+  };
 
   const handleInputChange = (e) => {
-    setMsg(e.target.value);
-  }
+    const converedMsg = replaceEmoticons(emoji.emojify(e.target.value));
+    setMessage(converedMsg);
+  };
 
   return (
     <Container>
       <Input
         onChange={handleInputChange}
-        onKeyPress={handleSend}
-        placeholder="Type a message here"
-        type="text"
+        onKeyPress={handleInputSend}
+        placeholder='Type a message here'
+        type='text'
         ref={ref}
+        value={message}
+        spellcheck="false"
+        autoFocus
       />
-      <Send onClick={handleSend}><SendSVG /></Send>
+      <Send onClick={handleSend}>
+        <SendSVG />
+      </Send>
     </Container>
-  )
+  );
 };
 
-MessagesInput.propTypes = {
-
-};
+MessagesInput.propTypes = {};
 
 export default MessagesInput;

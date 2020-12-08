@@ -9,6 +9,7 @@ export const AppContext = createContext();
 const AppProvider = () => {
   // const [loadClient, setLoadClient] = useState(true);
   const [user, setUser] = useState(false);
+  
   return (
     <AppContext.Provider value={{ user, setUser }}>
       <Container>

@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 import { colors, util } from '../../style';
 
-const { Input, scroll } = util;
+const { Input, ScrollBar } = util;
 const { color } = colors;
 
 export const Container = styled.aside`
@@ -19,9 +19,11 @@ export const User = styled.div`
 `;
 
 export const HeaderWrapper = styled.div`
-  display: flex;  
+  display: flex;
   padding: 0.9rem 1.875rem;
   align-items: center;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const AddNew = styled.span`
@@ -53,18 +55,17 @@ export const AddNew = styled.span`
 
 export const Header = styled.div`
   font-weight: bold;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const ContentWrapper = styled.div`
   padding: 1.25rem 1.875rem 0 1.875rem;
+  position: relative;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 `;
 
 export const Search = styled(Input)`
-  margin-bottom: 2rem;
   background: ${color(`black-light`)};
   border: none;
   position: relative;
@@ -118,10 +119,13 @@ export const SearchWrapper = styled.div`
 export const ChannelsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
+  position: absolute;
   overflow: auto;
-  height: 675px;
-  ${scroll}
+  top: 6.25rem;
+  left: 1.875rem;
+  right: 0;
+  bottom: 0.25rem;
+  ${ScrollBar}
 `;
 
 export const ChannelWrapper = styled.div`
@@ -162,22 +166,24 @@ export const FooterWrapper = styled.div`
   background: ${color(`black-dark`)};
 `;
 
-export const Footer = styled.div`
-`;
+export const Footer = styled.div``;
 
 export const FooterIcon = styled.span`
   border-radius: 8px;
   margin-right: 28px;
   height: 42px;
   width: 42px;
-  background-image: url(${({image}) => image});
+  background-image: url(${({ image }) => image});
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 `;
 
 export const FooterDropdown = styled.span`
-  
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+
   svg {
     transition: transform 0.2s ease-in-out;
     fill: ${color(`white`)};

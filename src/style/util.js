@@ -50,7 +50,7 @@ export const Input = styled.input`
   }
 `;
 
-export const scroll = css`
+export const ScrollBar = css`
   &::-webkit-scrollbar {
     width: 4px;
     border-radius: 2px;
