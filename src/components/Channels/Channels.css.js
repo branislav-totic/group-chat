@@ -35,7 +35,7 @@ export const AddNew = styled.span`
   font-size: 14px;
   padding: 8.5px 9px;
   box-shadow: 0px 0px 0px 1px transparent;
-  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 
   svg {
     height: 14px;
@@ -50,6 +50,7 @@ export const AddNew = styled.span`
   &:hover {
     background-color: ${color(`black-light`)};
     box-shadow: 0px 0px 0px 1px white;
+    transform: scale(1.05);
   }
 `;
 
