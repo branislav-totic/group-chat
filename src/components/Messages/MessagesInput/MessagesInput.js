@@ -12,15 +12,16 @@ const MessagesInput = ({
   const [ message, setMessage ] = useState(``);
 
   const handleInputSend = (e) => {
-    if (e.key === 'Enter' || e.keyCode === 13) {
-      // send msg
-      setMessages((messages)=>([...messages, message]))
-      setMessage(``)
+    if (e.key === `Enter` || e.keyCode === 13) {
+      handleSend();
     }
   };
 
   const handleSend = () => {
-    // send msg
+    if (message === ``) return;
+
+    setMessages((messages)=>([...messages, message]))
+    setMessage(``)
   };
 
   const handleInputChange = (e) => {
@@ -33,8 +34,8 @@ const MessagesInput = ({
       <Input
         onChange={handleInputChange}
         onKeyPress={handleInputSend}
-        placeholder='Type a message here'
-        type='text'
+        placeholder="Type a message here"
+        type="text"
         ref={ref}
         value={message}
         spellcheck="false"
