@@ -19,8 +19,13 @@ const MessagesInput = ({
 
   const handleSend = () => {
     if (message === ``) return;
-
-    setMessages((messages)=>([message, ...messages]))
+    const newMsg = {
+      userName: `Branislav Totic`,
+      userAvatar: `https://pbs.twimg.com/profile_images/973611685822058497/yRRo9D52_normal.jpg`,
+      message,
+      time: new Date().getTime()
+    }
+    setMessages((messages)=>([newMsg, ...messages]))
     setMessage(``)
   };
 
