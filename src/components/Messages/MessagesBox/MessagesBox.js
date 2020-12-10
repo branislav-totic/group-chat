@@ -17,24 +17,43 @@ import {
 const MessagesBox = ({
   messages,
 }) => {
-  
+
+  const renderMessage = ({
+    userName,
+    userAvatar,
+    message,
+  }) => {
+    return (
+      <MessageWrapper>
+        <IconWrapper>
+          <Icon src={userAvatar}/>
+        </IconWrapper>
+        <MessageContent> 
+          <MessageInfo>{userName}<span>yestready 12:10</span></MessageInfo>
+          <Message>{message}</Message>
+        </MessageContent>
+      </MessageWrapper>
+    )
+  }
+
+  const renderBraker = ({ time }) => {
+    return (
+      <Breaker><span>{new Date(time).toDateString()}</span></Breaker>
+    )
+  }
+
   return (
     <Container>
       <MessagesWrapper>
-        {messages.map((message)=>(
-          <>
-            <MessageWrapper>
-              <IconWrapper>
-                <Icon src="https://insideofknoxville.com/wp-content/uploads/2012/07/Random-Person-on-the-Street-Knoxville-July-2012.jpg"/>
-              </IconWrapper>
-              <MessageContent> 
-                <MessageInfo>Branislav Totic<span>yestready 12:10</span></MessageInfo>
-                <Message>{message}</Message>
-              </MessageContent>
-            </MessageWrapper>
-            <Breaker><span>{`August 3. 2020`}</span></Breaker>
-          </>
-        ))}
+        {messages.map((item)=>{
+          const { time } = item;
+          return (
+            <React.Fragment key={time}>
+              {renderMessage(item)}
+              {renderBraker(item)}
+            </React.Fragment>
+          )
+        })}
       </MessagesWrapper>
     </Container>
   )

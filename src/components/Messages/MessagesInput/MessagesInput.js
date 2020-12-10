@@ -19,8 +19,13 @@ const MessagesInput = ({
 
   const handleSend = () => {
     if (message === ``) return;
-
-    setMessages((messages)=>([message, ...messages]))
+    const newMsg = {
+      userName: `Branislav Totic`,
+      userAvatar: `https://insideofknoxville.com/wp-content/uploads/2012/07/Random-Person-on-the-Street-Knoxville-July-2012.jpg`,
+      message,
+      time: new Date().getTime()
+    }
+    setMessages((messages)=>([newMsg, ...messages]))
     setMessage(``)
   };
 
