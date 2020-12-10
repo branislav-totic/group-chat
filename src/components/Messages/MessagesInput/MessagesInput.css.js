@@ -34,7 +34,7 @@ export const Send = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 
   svg {
     width: 16px;
@@ -43,5 +43,6 @@ export const Send = styled.span`
 
   &:hover {
     opacity: 0.8;
+    transform: scale(1.05);
   }
 `;

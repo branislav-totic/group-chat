@@ -6,6 +6,7 @@ import {
   Breaker,
   Container,
   Icon,
+  IconWrapper,
   Message,
   MessageContent,
   MessageInfo,
@@ -23,13 +24,15 @@ const MessagesBox = ({
         {messages.map((message)=>(
           <>
             <MessageWrapper>
-              <Icon>icon</Icon>
+              <IconWrapper>
+                <Icon src="https://insideofknoxville.com/wp-content/uploads/2012/07/Random-Person-on-the-Street-Knoxville-July-2012.jpg"/>
+              </IconWrapper>
               <MessageContent> 
                 <MessageInfo>Branislav Totic<span>yestready 12:10</span></MessageInfo>
                 <Message>{message}</Message>
               </MessageContent>
             </MessageWrapper>
-            <Breaker>{`August 3. 2020`}</Breaker>
+            <Breaker><span>{`August 3. 2020`}</span></Breaker>
           </>
         ))}
       </MessagesWrapper>

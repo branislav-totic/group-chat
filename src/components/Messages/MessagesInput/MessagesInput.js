@@ -20,7 +20,7 @@ const MessagesInput = ({
   const handleSend = () => {
     if (message === ``) return;
 
-    setMessages((messages)=>([...messages, message]))
+    setMessages((messages)=>([message, ...messages]))
     setMessage(``)
   };
 
