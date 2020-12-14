@@ -21,7 +21,7 @@ const MessagesInput = ({
     if (message === ``) return;
     const newMsg = {
       userName: `Branislav Totic`,
-      userAvatar: `https://insideofknoxville.com/wp-content/uploads/2012/07/Random-Person-on-the-Street-Knoxville-July-2012.jpg`,
+      userAvatar: `https://pbs.twimg.com/profile_images/973611685822058497/yRRo9D52_normal.jpg`,
       message,
       time: new Date().getTime()
     }
