@@ -1,8 +1,9 @@
 import styled from 'styled-components/macro';
-import { colors, util } from '../../style';
+import { colors, sizing, util } from '../../style';
 
 const { Input, ScrollBar } = util;
 const { color } = colors;
+const { font } = sizing;
 
 export const Container = styled.aside`
   background: ${color(`black`)};
@@ -14,10 +15,6 @@ export const Container = styled.aside`
   flex-direction: column;
 `;
 
-export const User = styled.div`
-  background: ${color(`black`)};
-`;
-
 export const HeaderWrapper = styled.div`
   display: flex;
   padding: 0.9rem 1.875rem;
@@ -27,6 +24,7 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const AddNew = styled.span`
+  cursor: pointer;
   display: flex;
   justify-content: center;
   border-radius: 8px;
@@ -133,6 +131,7 @@ export const ChannelWrapper = styled.div`
   display: flex;
   margin-bottom: 1.25rem;
   align-items: center;
+  cursor: pointer;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -169,7 +168,7 @@ export const FooterWrapper = styled.div`
 
 export const Footer = styled.div``;
 
-export const FooterIcon = styled.span`
+export const UserIcon = styled.span`
   border-radius: 8px;
   margin-right: 28px;
   height: 42px;
@@ -196,3 +195,34 @@ export const FooterDropdown = styled.span`
     }
   }
 `;
+
+export const ChannelDescription = styled.div`
+  font-size: ${font(3)};
+  line-height: 1.35;
+  letter-spacing: -0.3px;
+  margin-top: 1.125rem;
+  margin-bottom: 2.875rem;
+`;
+
+export const ChannelUsers = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: ${font(4)};
+  line-height: 1.35;
+  letter-spacing: -0.3px;
+`;
+
+export const ChannelTitle = styled.span`
+ 
+  margin-bottom: 1.5rem;
+`;
+
+export const ChannelUser = styled.span`
+  display: flex;
+  color: ${color(`gray`)};
+  align-items: center;
+  margin-bottom: 2rem;
+`;
+
+export const UserName = styled.span``;

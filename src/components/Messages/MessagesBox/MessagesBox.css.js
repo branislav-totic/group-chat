@@ -15,7 +15,7 @@ export const MessagesWrapper = styled.div`
   flex-direction: column-reverse;
   position: absolute;
   overflow: auto;
-  top: 0;
+  top: 5px;
   left: 0;
   right: 0;
   bottom: 50px;
@@ -29,7 +29,7 @@ export const Breaker = styled.span`
   justify-content: center;
   font-size: ${font(1)};
   line-height: 1.3;
-  letter-spacing: 0.3px;
+  letter-spacing: -0.3px;
   color: ${color(`gray`)};
   margin-bottom: 2.25rem;
   padding-right: 0.5rem;
@@ -42,9 +42,6 @@ export const Breaker = styled.span`
     background-color: ${color(`gray`)};
   }
 
-  /* &::before {
-   left: 0; 
-  } */
   span {
     position: absolute;
     padding: 0 1.25rem;
@@ -56,6 +53,10 @@ export const MessageWrapper = styled.div`
   display: flex;
   margin-bottom: 2.25rem;
   padding-right: 0.5rem;
+
+  &:first-child {
+    margin-bottom: 0;
+  }
 `;
 
 export const IconWrapper = styled.div`
@@ -74,12 +75,12 @@ export const Icon = styled.img`
 `;
 
 export const MessageContent = styled.div`
-  width: calc(100% - 2.625rem - 1.75rem);
+  width: 100%;
 `;
 
 export const MessageInfo = styled.div`
   font-size: ${font(4)};
-  letter-spacing: 0.3px;
+  letter-spacing: -0.3px;
   line-height: 1.3;
   color: ${color(`gray`)};
   font-weight: bold;
@@ -94,7 +95,7 @@ export const MessageInfo = styled.div`
 
 export const Message = styled.div`
   font-size: ${font(4)};
-  letter-spacing: 0.3px;
+  letter-spacing: -0.3px;
   line-height: 1.3;
   font-weight: normal;
   word-break: break-all;

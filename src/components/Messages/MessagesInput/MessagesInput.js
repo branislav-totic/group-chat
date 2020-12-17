@@ -19,19 +19,21 @@ const MessagesInput = ({
 
   const handleSend = () => {
     if (message === ``) return;
+
+    const convertedMsg = replaceEmoticons(emoji.emojify(message));
     const newMsg = {
       userName: `Branislav Totic`,
       userAvatar: `https://pbs.twimg.com/profile_images/973611685822058497/yRRo9D52_normal.jpg`,
-      message,
+      message: convertedMsg,
       time: new Date().getTime()
     }
+    
     setMessages((messages)=>([newMsg, ...messages]))
     setMessage(``)
   };
 
   const handleInputChange = (e) => {
-    const converedMsg = replaceEmoticons(emoji.emojify(e.target.value));
-    setMessage(converedMsg);
+    setMessage(e.target.value);
   };
 
   return (

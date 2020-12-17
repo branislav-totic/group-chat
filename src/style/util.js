@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components/macro';
 import { color } from './helpers/colors';
+import { fontRegular } from './fonts.css';
 
 export const Button = styled.button`
   background-color: ${color(`blue-dark`)};
   border: unset;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   color: ${color(`white`)};
   font-size: 1rem;
   line-height: 1.4;
@@ -33,7 +34,8 @@ export const Link = styled.a`
 `;
 
 export const Input = styled.input`
-  border-radius: 8px;
+  ${fontRegular}
+  border-radius: 0.5rem;
   box-sizing: border-box;
   border: 1px solid ${color(`gray-light`)};
   font-size: 1rem;
@@ -44,7 +46,8 @@ export const Input = styled.input`
     color: ${color(`gray-light`)};
   }
 
-  &:focus {
+  &:focus,
+  &:hover {
     outline: none;
     box-shadow: 0 0 2px 1px ${color(`gray`)};
   }

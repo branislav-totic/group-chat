@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AppContext } from '../App/App';
 import PropTypes from 'prop-types';
-import { Messages, Channels } from '..';
+import { Messages, Channels, Modal } from '..';
 import { Root } from './GroupChat.css';
 
 const GroupChat = ({ user }) => {
@@ -17,6 +17,7 @@ const GroupChat = ({ user }) => {
 
   return (
     <Root>
+      <Modal/>
       <Channels/>
       <Messages/>
     </Root>

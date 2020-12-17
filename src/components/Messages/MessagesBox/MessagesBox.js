@@ -17,25 +17,29 @@ import {
 const MessagesBox = ({
   messages,
 }) => {
-  const [lastBreakTime, setLastBreakTime] = useState('');
 
   const formatDate = (date) => {
     const today = new Date();
     const comparedTime = new Date(date);
     const months = [`jan`, `feb`, `mar`, `apr`, `maj`, `jun`, `jul`, `aug`, `sept`, `oct`, `nov`, `dec`];
-    const isThisMonth = comparedTime.getMonth() === today.getMonth() &&
-    comparedTime.getFullYear() === today.getFullYear();
-    const getTime = `${String(comparedTime.getHours()).padStart(2, '0')}:${String(comparedTime.getMinutes()).padStart(2, '0')}`;
-    let getDate;
 
-    if (isThisMonth && comparedTime.getDate() === today.getDate()) {
-      getDate = `today ${getTime}`;
-    } else if (isThisMonth && comparedTime.getDate() === today.getDate() - 1) {
-      getDate = `yestreday ${getTime}`;
+    const getYear = comparedTime.getFullYear() === today.getFullYear() ? '' : comparedTime.getFullYear();
+    const getMonth = months[comparedTime.getMonth()];
+    const getDate = comparedTime.getDate();
+    const getTime = `${String(comparedTime.getHours()).padStart(2, '0')}:${String(comparedTime.getMinutes()).padStart(2, '0')}`;
+
+    const isThisMonth = comparedTime.getMonth() === today.getMonth() && comparedTime.getFullYear() === today.getFullYear();
+    
+    let newDate;
+
+    if (isThisMonth && getDate === today.getDate()) {
+      newDate = `today ${getTime}`;
+    } else if (isThisMonth && getDate === today.getDate() - 1) {
+      newDate = `yestreday ${getTime}`;
     } else {
-      getDate = `${comparedTime.getDate()}. ${months[comparedTime.getMonth()]} ${getTime}`;
+      newDate = `${getDate}. ${getMonth} ${getYear} ${getTime}`;
     }
-    return getDate;
+    return newDate;
   }
 
   const renderMessage = ({
@@ -62,23 +66,42 @@ const MessagesBox = ({
     )
   }
 
+  const renderMessages = () => {
+    let printedTime;
+
+    return messages.map((item, index)=>{
+      const { time } = item;
+      const formatedTime = formatDate(time);
+      let formatedDateNext;
+      let shouldRenderBreake = false;
+      
+      const splitedTime = formatedTime.split(' ');
+      const formatedDate = splitedTime.length > 2 ? `${splitedTime[0]} ${splitedTime[1]}` : splitedTime[0];
+      printedTime = formatedDate;
+      
+      if (messages.length !== index + 1) {
+        const formatedTimeNext = formatDate(messages[index + 1].time);
+        const splitedTimeNext = formatedTimeNext.split(' ');
+        formatedDateNext = splitedTimeNext.length > 2 ? `${splitedTimeNext[0]} ${splitedTimeNext[1]}` : splitedTimeNext[0];
+      }
+      
+      if (formatedDateNext && printedTime && printedTime !== formatedDateNext) {
+        shouldRenderBreake = true;
+      }
+
+      return (
+        <React.Fragment key={time}>
+          {renderMessage(item, formatedTime)}
+          {shouldRenderBreake && renderBraker(formatedDate)}
+        </React.Fragment>
+      )
+    })
+  }
+
   return (
     <Container>
       <MessagesWrapper>
-        {messages.map((item)=>{
-          const { time } = item;
-          const formatedTime = formatDate(time);
-
-          const splitedTime = formatedTime.split(' ');
-          const formatedDate = splitedTime.length > 2 ? `${splitedTime[0]} ${splitedTime[1]}` : splitedTime[0];
-          
-          return (
-            <React.Fragment key={time}>
-              {renderMessage(item, formatedTime)}
-              {renderBraker(formatedDate)}
-            </React.Fragment>
-          )
-        })}
+        {renderMessages()}
       </MessagesWrapper>
     </Container>
   )

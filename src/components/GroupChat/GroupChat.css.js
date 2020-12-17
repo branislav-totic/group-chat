@@ -4,7 +4,7 @@ const { color } = colors;
 
 export const Root = styled.div`
   display: flex;
-
+  position: relative;
   height: 100%;
 `;
 
