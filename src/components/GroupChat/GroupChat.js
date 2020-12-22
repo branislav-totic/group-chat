@@ -1,34 +1,26 @@
-import React, { useState } from 'react';
-import { AppContext } from '../App/App';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Messages, Channels, Modal } from '..';
+import { Messages, Channels, CreateChannel, AppContext } from '..';
 import { Root } from './GroupChat.css';
 
-const GroupChat = ({ user }) => {
-  const [open, setOpen] = useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+const GroupChat = ({
+  activeChannel,
+}) => {
 
   return (
     <Root>
-      <Modal/>
+      <CreateChannel/>
       <Channels/>
-      <Messages/>
+      <Messages channelName={activeChannel}/>
     </Root>
   );
 };
 
-const GroupChatProvider = () => {
+const GroupChatProvider = (props) => {
   return (
     <AppContext.Consumer>
-      {({ user }) => {
-        return <GroupChat user={user} />;
+      {(context) => {
+        return <GroupChat {...props} {...context} />;
       }}
     </AppContext.Consumer>
   );

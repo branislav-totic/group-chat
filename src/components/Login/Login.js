@@ -1,22 +1,26 @@
 import React from "react";
 import PropTypes from 'prop-types'
-import { AppContext } from "../App/App";
+import { AppContext } from "..";
 import {
   Container,
   Footer,
   Form,
   Header,
-  // Icon,
   Input,
   FormWrapper,
   RegisterLink,
   Submit,
 } from "./Login.css";
 
+//change data with real content
+import data from '../App/data.json'
+
 const Login = ({ setUser }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUser(true);
+
+    // set user on login
+    setUser(data.user);
     // fetch("http://127.0.0.1:3001/user")
     //   .then((data) => data.json())
     //   .then(

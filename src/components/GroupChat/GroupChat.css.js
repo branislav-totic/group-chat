@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro';
 import { colors } from '../../style';
+
 const { color } = colors;
 
 export const Root = styled.div`

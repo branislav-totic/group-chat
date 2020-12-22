@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 import { colors, sizing, util } from '../../style';
 
 const { Input, ScrollBar } = util;
@@ -40,6 +40,8 @@ export const AddNew = styled.span`
     width: 14px;
     stroke-width: 2px;
     fill: ${color(`white`)};
+    transition: transform 0.15s ease-in-out;
+
     path {
       stroke: ${color(`white`)};
     }
@@ -50,6 +52,11 @@ export const AddNew = styled.span`
     box-shadow: 0px 0px 0px 1px white;
     transform: scale(1.05);
   }
+  ${({ isOpen }) => isOpen && css`
+    svg {
+      transform: rotate(135deg);
+    }
+  `}
 `;
 
 export const Header = styled.div`

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import emoji from 'node-emoji';
 import { replaceEmoticons } from 'emoticon-to-emoji';
@@ -8,13 +8,13 @@ import { ReactComponent as SendSVG } from '../../../assets/images/send-white.svg
 const MessagesInput = ({
   setMessages,
 }) => {
-  const ref = useRef();
-  const [ message, setMessage ] = useState(``);
+  const [message, setMessage] = useState(``);
+  
 
   const handleInputSend = (e) => {
     if (e.key === `Enter` || e.keyCode === 13) {
       handleSend();
-    }
+    };
   };
 
   const handleSend = () => {
@@ -26,10 +26,10 @@ const MessagesInput = ({
       userAvatar: `https://pbs.twimg.com/profile_images/973611685822058497/yRRo9D52_normal.jpg`,
       message: convertedMsg,
       time: new Date().getTime()
-    }
+    };
     
-    setMessages((messages)=>([newMsg, ...messages]))
-    setMessage(``)
+    setMessages((messages) => ([ newMsg, ...messages ]));
+    setMessage(``);
   };
 
   const handleInputChange = (e) => {
@@ -43,7 +43,6 @@ const MessagesInput = ({
         onKeyPress={handleInputSend}
         placeholder="Type a message here"
         type="text"
-        ref={ref}
         value={message}
         spellcheck="false"
         autoFocus
@@ -55,6 +54,8 @@ const MessagesInput = ({
   );
 };
 
-MessagesInput.propTypes = {};
+MessagesInput.propTypes = {
+  setMessages: PropTypes.func,
+};
 
 export default MessagesInput;

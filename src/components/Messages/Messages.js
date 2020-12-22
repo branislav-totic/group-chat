@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
 import MessagesBox from './MessagesBox/MessagesBox';
 import MessagesInput from './MessagesInput/MessagesInput';
-import { Container, Header, Wrapper } from './Messages.css';
+import {
+  Container,
+  Header,
+  Wrapper,
+} from './Messages.css';
 
-const Messages = () => {
-const [ messages, setMessages ] = useState([{
+const Messages = ({channelName}) => {
+const [messages, setMessages] = useState([{
   "userName": "Branislav Totic",
   "userAvatar": "https://pbs.twimg.com/profile_images/973611685822058497/yRRo9D52_normal.jpg",
   "message": "saddas",
@@ -14,7 +19,7 @@ const [ messages, setMessages ] = useState([{
 
   return (
     <Container>
-      <Header>GLOBAL</Header>
+      <Header>{channelName.toUpperCase()}</Header>
       <Wrapper>
         <MessagesBox messages={messages} />
         <MessagesInput
@@ -25,6 +30,8 @@ const [ messages, setMessages ] = useState([{
   );
 };
 
-Messages.propTypes = {};
+Messages.propTypes = {
+  channelName: PropTypes.string
+};
 
 export default Messages;

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { AppContext } from "../../App/App";
+import React from 'react';
+import { AppContext } from '../..';
 import PropTypes from 'prop-types';
 
 import {
@@ -17,7 +17,6 @@ import {
 const MessagesBox = ({
   messages,
 }) => {
-
   const formatDate = (date) => {
     const today = new Date();
     const comparedTime = new Date(date);
@@ -58,13 +57,13 @@ const MessagesBox = ({
         </MessageContent>
       </MessageWrapper>
     )
-  }
+  };
 
   const renderBraker = (time) => {
     return (
       <Breaker><span>{time}</span></Breaker>
     )
-  }
+  };
 
   const renderMessages = () => {
     let printedTime;
@@ -95,8 +94,8 @@ const MessagesBox = ({
           {shouldRenderBreake && renderBraker(formatedDate)}
         </React.Fragment>
       )
-    })
-  }
+    });
+  };
 
   return (
     <Container>
@@ -104,21 +103,28 @@ const MessagesBox = ({
         {renderMessages()}
       </MessagesWrapper>
     </Container>
-  )
+  );
 };
 
 const MessagesBoxProvider = (props) => {
   return (
     <AppContext.Consumer>
-      {() => {
-        return <MessagesBox {...props} />;
+      {(context) => {
+        return <MessagesBox {...props} {...context}/>;
       }}
     </AppContext.Consumer>
   );
 };
 
 MessagesBox.propTypes = {
-
+  messages: PropTypes.arrayOf(
+    PropTypes.shape({
+      message: PropTypes.string,
+      time: PropTypes.number,
+      userAvatar: PropTypes.string,
+      userName: PropTypes.string,
+    })
+  )
 };
 
 export default MessagesBoxProvider;

@@ -1,0 +1,71 @@
+{
+  "user": {
+    "id": 1,
+    "userName": "Totic Branislav",
+    "password": "12345",
+    "email": "branislav.totic@decem.co"
+  },
+  "userChannels": [
+    {
+      "id": 1,
+      "icon": "FD",
+      "name": "Front-end developers",
+      "desc": "Lorem ipsum dolor sit amet, sale pertinax per an, eum fabellas sensibus at, mutat scaevola platonem no est. Eius iudico."
+    },
+    {
+      "id": 2,
+      "icon": "R",
+      "name": "Random",
+      "desc": "Lorem ipsum dolor sit amet, ei vidit vituperatoribus sed, ex nam illum explicari, deterruisset definitiones sit et. Facete apeirian assueverit."
+    },
+    {
+      "id": 3,
+      "icon": "B",
+      "name": "Back-end",
+      "desc": "Lorem ipsum dolor sit amet, cum no utamur delicatissimi, mea viris eirmod eu. Iusto splendide te his, quo natum nostrum."
+    },
+    {
+      "id": 4,
+      "icon": "CA",
+      "name": "Cats and Dogs",
+      "desc": "Lorem ipsum dolor sit amet, ex duo accusam consulatu, at pri habeo dolor sensibus. Has scaevola incorrupte no. Quis soluta."
+    },
+    {
+      "id": 5,
+      "icon": "W",
+      "name": "Wellcome",
+      "desc": "Lorem ipsum dolor sit amet, ex mei ferri fabellas scribentur, qui veritus dolores at. Veri dictas ut cum, omittam qualisque."
+    },
+    {
+      "id": 6,
+      "icon": "FD",
+      "name": "Front-end developers",
+      "desc": "Lorem ipsum dolor sit amet, sale pertinax per an, eum fabellas sensibus at, mutat scaevola platonem no est. Eius iudico."
+    },
+    {
+      "id": 7,
+      "icon": "R",
+      "name": "Random",
+      "desc": "Lorem ipsum dolor sit amet, ei vidit vituperatoribus sed, ex nam illum explicari, deterruisset definitiones sit et. Facete apeirian assueverit."
+    },
+    {
+      "id": 8,
+      "icon": "B",
+      "name": "Back-end",
+      "desc": "Lorem ipsum dolor sit amet, cum no utamur delicatissimi, mea viris eirmod eu. Iusto splendide te his, quo natum nostrum."
+    },
+    {
+      "id": 9,
+      "icon": "CA",
+      "name": "Cats and Dogs",
+      "desc": "Lorem ipsum dolor sit amet, ex duo accusam consulatu, at pri habeo dolor sensibus. Has scaevola incorrupte no. Quis soluta."
+    },
+    {
+      "id": 10,
+      "icon": "W",
+      "name": "Wellcome",
+      "desc": "Lorem ipsum dolor sit amet, ex mei ferri fabellas scribentur, qui veritus dolores at. Veri dictas ut cum, omittam qualisque."
+    }
+  ],
+  "channel": {}
+}

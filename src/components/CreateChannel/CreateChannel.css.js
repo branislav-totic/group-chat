@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components/macro';
 import { colors, sizing, util } from '../../style';
 
 const { Input, Button, ScrollBar } = util;
@@ -9,11 +9,28 @@ export const Container = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-120%, -145%) scale(0.1);
   background-color: ${color(`black`)};
   border-radius: 1.5rem;
   padding: 2rem 2.5rem 1.5rem;
   z-index: 99;
+  transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+
+  @media (min-width: 1600px) {
+    transform: translate(-140%, -145%) scale(0.1);
+  }
+
+  ${({isVisible}) => isVisible && css`
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+
+    @media (min-width: 1600px) {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  `}
 `;
 
 export const Title = styled.span`
