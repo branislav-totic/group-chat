@@ -8,4 +8,5 @@ const roomSchema = Schema({
 });
 
 const Room = mongoose.model('Room', roomSchema);
+
 module.exports = Room;

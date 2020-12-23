@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require("body-parser");
+const cors = require('cors')
 const http = require("http");
 const socketIo = require("socket.io");
 const routes = require('./routes');
@@ -12,6 +13,7 @@ const port = process.env.BACKEND_PORT || 3001;
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cors())
 app.use(routes);
 
 
