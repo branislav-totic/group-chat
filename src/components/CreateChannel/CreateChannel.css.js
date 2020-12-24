@@ -6,30 +6,38 @@ const { color } = colors;
 const { font } = sizing;
 
 export const Container = styled.div`
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-120%, -145%) scale(0.1);
-  background-color: ${color(`black`)};
   border-radius: 1.5rem;
-  padding: 2rem 2.5rem 1.5rem;
   z-index: 99;
-  transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   visibility: hidden;
-  opacity: 0;
+  backface-visibility: hidden;
+  transform: translate(-50%, -50%);
+  perspective: 1300px;
 
-  @media (min-width: 1600px) {
-    transform: translate(-140%, -145%) scale(0.1);
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 2px white;
   }
 
-  ${({isVisible}) => isVisible && css`
+  ${({ isVisible }) => isVisible && css`
     visibility: visible;
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+  `}
+`;
 
-    @media (min-width: 1600px) {
-      transform: translate(-50%, -50%) scale(1);
-    }
+export const Form = styled.form`
+  padding: 2rem 2.5rem 1.5rem;
+  transform-style: preserve-3d;
+  transform: translateZ(600px) rotateX(20deg);
+  opacity: 0;
+  background-color: ${color(`black`)};
+  border-radius: 1.5rem;
+
+  ${({ isVisible }) => isVisible && css`
+    transition: all 0.3s ease-in;
+    transform: translateZ(0px) rotateX(0deg);
+    opacity: 1;
   `}
 `;
 

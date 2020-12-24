@@ -19,7 +19,7 @@ const [messages, setMessages] = useState([{
 
   return (
     <Container>
-      <Header>{channelName.toUpperCase()}</Header>
+      <Header>{(channelName || `Global`).toUpperCase()}</Header>
       <Wrapper>
         <MessagesBox messages={messages} />
         <MessagesInput

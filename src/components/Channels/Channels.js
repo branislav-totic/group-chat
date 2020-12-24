@@ -4,16 +4,13 @@ import PropTypes from 'prop-types';
 import { ReactComponent as PlusSVG } from '../../assets/images/plus.svg';
 import { ReactComponent as DownArrowSVG } from '../../assets/images/down-arrow.svg';
 import { AppContext } from '..';
+import ChannelDrawer from './ChannelsDrawer/ChannelDrawer';
 
 
 import {
   AddNew,
-  ChannelDescription,
   ChannelIcon,
   ChannelName,
-  ChannelTitle,
-  ChannelUser,
-  ChannelUsers,
   ChannelWrapper,
   ChannelsWrapper,
   Container,
@@ -27,7 +24,10 @@ import {
   SearchIcon,
   SearchWrapper,
   UserIcon,
-  UserName,
+  ChannelHeader,
+  MainHeader,
+  FooterDrawer,
+  FoooterDrawerItem,
 } from './Channels.css';
 
 //change with real data
@@ -49,16 +49,26 @@ const Channels = ({
     setIsModalOpen((prev) => !prev);
   };
 
+  const handleReturnToGlobal = () => {
+    setActiveChannel(``);
+  }
+
   const renderHeader = () => {
     return (
       <HeaderWrapper>
-        <Header>Channels</Header>
-        <AddNew
-          onClick={handleAddNew}
-          isOpen={isModalOpen}
-        >
-          <PlusSVG/>
-        </AddNew>
+        <MainHeader isVisible={!activeChannel}>
+          <Header>Channels</Header>
+          <AddNew
+            onClick={handleAddNew}
+            isOpen={isModalOpen}
+          >
+            <PlusSVG/>
+          </AddNew>
+        </MainHeader>
+        <ChannelHeader isVisible={activeChannel}>
+          <DownArrowSVG onClick={handleReturnToGlobal} />
+          {`All channels`}
+        </ChannelHeader>
       </HeaderWrapper>
     )
   };
@@ -68,7 +78,13 @@ const Channels = ({
       <FooterWrapper>
         <UserIcon image="assets/images/3b9735f2ac6ac459b44dd6fa1b8a771b.png" />
         <Footer>Xanthe Neal</Footer>
-        <FooterDropdown><DownArrowSVG /></FooterDropdown>
+        <FooterDropdown>
+          <DownArrowSVG />
+          <FooterDrawer>
+            <FoooterDrawerItem>My Profile</FoooterDrawerItem>
+            <FoooterDrawerItem>Logout</FoooterDrawerItem>
+          </FooterDrawer>
+        </FooterDropdown>
       </FooterWrapper>
     )
   };
@@ -78,58 +94,33 @@ const Channels = ({
   };
 
   const renderChannelsInfo = () => {
-    console.log(activeChannel)
-    if (activeChannel !== "Global") {
-      return (
-        <ContentWrapper>
-          <ChannelName>{channels[0].name}</ChannelName>
-          <ChannelDescription>{channels[0].desc}</ChannelDescription>
-          <ChannelUsers>
-            <ChannelTitle>MEMBERS</ChannelTitle>
-            <ChannelUser>
-              <UserIcon image="assets/images/3b9735f2ac6ac459b44dd6fa1b8a771b.png" />
-              <UserName>Xanthe Neal</UserName>
-            </ChannelUser>
-            <ChannelUser>
-              <UserIcon image="assets/images/3b9735f2ac6ac459b44dd6fa1b8a771b.png" />
-              <UserName>Xanthe Neal</UserName>
-            </ChannelUser>
-            <ChannelUser>
-              <UserIcon image="assets/images/3b9735f2ac6ac459b44dd6fa1b8a771b.png" />
-              <UserName>Xanthe Neal</UserName>
-            </ChannelUser>
-          </ChannelUsers>
-        </ContentWrapper>
-      );
-    } else {
-      return (
-        <ContentWrapper>
-          <SearchWrapper>
-            <Search type='search' placeholder='Search' required />
-            <SearchIcon></SearchIcon>
-          </SearchWrapper>
-          <ChannelsWrapper>
-  
-            {channels.map(({name}, index) => {
-              const nameSplit = name.split(" ");
-              const icon = nameSplit.length > 1 ? `${nameSplit[0].charAt(0)}${nameSplit[1].charAt(0)}` : nameSplit[0].charAt(0);
-              return (
-              <ChannelWrapper
-                key={`${name}-${index}`}
-                onClick={handleChanneChange(name)}
-              >
-                <ChannelIcon>{icon.toUpperCase()}</ChannelIcon>
-                <ChannelName>{name}</ChannelName>
-              </ChannelWrapper>
-            )})}
-  
-          </ChannelsWrapper>
-        </ContentWrapper>
-      );
-    };
+    return (
+      <ContentWrapper>
+        <ChannelDrawer
+          channels={channels}
+          isVisible={activeChannel}
+        />
+        <SearchWrapper isVisible={!activeChannel}>
+          <Search type='search' placeholder='Search' required />
+          <SearchIcon></SearchIcon>
+        </SearchWrapper>
+        <ChannelsWrapper isVisible={!activeChannel}>
+          {channels.map(({ name }, index) => {
+            const nameSplit = name.split(" ");
+            const icon = nameSplit.length > 1 ? `${nameSplit[0].charAt(0)}${nameSplit[1].charAt(0)}` : nameSplit[0].charAt(0);
+            return (
+            <ChannelWrapper
+              key={`${name}-${index}`}
+              onClick={handleChanneChange(name)}
+            >
+              <ChannelIcon>{icon.toUpperCase()}</ChannelIcon>
+              <ChannelName>{name}</ChannelName>
+            </ChannelWrapper>
+          )})}
+        </ChannelsWrapper>
+      </ContentWrapper>
+    );
   };
-
-
 
   return (
     <Container>

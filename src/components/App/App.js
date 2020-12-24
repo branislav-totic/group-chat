@@ -10,7 +10,7 @@ const AppProvider = () => {
   // const [loadClient, setLoadClient] = useState(true);
   const [user, setUser] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeChannel, setActiveChannel] = useState(`Global`)
+  const [activeChannel, setActiveChannel] = useState(``)
   
   const context = {
     user,
@@ -20,6 +20,7 @@ const AppProvider = () => {
     activeChannel,
     setActiveChannel,
   }
+
   return (
     <AppContext.Provider value={context}>
       <Container>

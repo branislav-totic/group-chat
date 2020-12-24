@@ -5,10 +5,12 @@ import { Root } from './GroupChat.css';
 
 const GroupChat = ({
   activeChannel,
+  isModalOpen,
 }) => {
-
   return (
-    <Root>
+    <Root 
+      modalOpen={isModalOpen}
+    >
       <CreateChannel/>
       <Channels/>
       <Messages channelName={activeChannel}/>

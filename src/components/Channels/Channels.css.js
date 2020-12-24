@@ -17,10 +17,50 @@ export const Container = styled.aside`
 
 export const HeaderWrapper = styled.div`
   display: flex;
-  padding: 0.9rem 1.875rem;
-  align-items: center;
-
+  position: relative;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+`;
+
+export const MainHeader = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.9rem 1.875rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  
+  ${({ isVisible }) => isVisible && css`
+    visibility: visible;
+    opacity: 1;
+  `}
+`;
+
+export const ChannelHeader = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  box-sizing: border-box;
+  font-weight: bold;
+  padding: 0.9rem 1.875rem;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+
+  svg {
+    fill: ${color(`white`)};
+    transform: rotate(90deg);
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+  }
+
+  ${({ isVisible }) => isVisible && css`
+    transform: translateX(0);
+  `}
 `;
 
 export const AddNew = styled.span`
@@ -31,6 +71,7 @@ export const AddNew = styled.span`
   background-color: ${color(`black-medium`)};
   margin-left: auto;
   font-size: 14px;
+  z-index: 1;
   padding: 8.5px 9px;
   box-shadow: 0px 0px 0px 1px transparent;
   transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
@@ -103,7 +144,7 @@ export const Search = styled(Input)`
 export const SearchIcon = styled.span`
   position: absolute;
   left: 0.75rem;
-  top: 0.75rem;
+  top: 0.9rem;
   background-image: url('assets/images/search.svg');
   background-repeat: no-repeat;
   width: 24px;
@@ -112,6 +153,9 @@ export const SearchIcon = styled.span`
 
 export const SearchWrapper = styled.div`
   position: relative;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
 
   ${Search}:focus + ${SearchIcon} {
     visibility: hidden;
@@ -120,6 +164,11 @@ export const SearchWrapper = styled.div`
   ${Search}:valid + ${SearchIcon} {
     visibility: hidden;
   }
+
+  ${({ isVisible }) => isVisible && css`
+    opacity: 1;
+    visibility: visible;
+  `}
 `;
 
 export const ChannelsWrapper = styled.div`
@@ -132,6 +181,14 @@ export const ChannelsWrapper = styled.div`
   right: 0;
   bottom: 0.25rem;
   ${ScrollBar}
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+
+  ${({ isVisible }) => isVisible && css`
+    opacity: 1;
+    visibility: visible;
+  `}
 `;
 
 export const ChannelWrapper = styled.div`
@@ -186,10 +243,41 @@ export const UserIcon = styled.span`
   background-position: center;
 `;
 
+export const FooterDrawer = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  top: 0.5rem;
+  left: 3rem;
+  transform: translate(-100%, 0);
+  background-color: ${color(`black-medium`)};
+  padding: 1rem;
+  border-radius: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+`;
+
+export const FoooterDrawerItem  = styled.div`
+  cursor: pointer;
+  padding: 0.75rem;
+  padding-right: 2.5rem; 
+  border-radius: 0.5rem;
+  
+  &:hover {
+    background-color: ${color(`black-light`)};
+  }
+`;
+
 export const FooterDropdown = styled.span`
   display: flex;
   align-items: center;
   margin-left: auto;
+  position: relative;
+  height: 100%;
+  width: 3.125rem;
+  justify-content: flex-end;
 
   svg {
     transition: transform 0.2s ease-in-out;
@@ -200,36 +288,11 @@ export const FooterDropdown = styled.span`
     svg {
       transform: rotate(180deg);
     }
+
+    ${FooterDrawer} {
+      transform: translate(-100%, -100%);
+      opacity: 1;
+      visibility: visible;
+    }
   }
 `;
-
-export const ChannelDescription = styled.div`
-  font-size: ${font(3)};
-  line-height: 1.35;
-  letter-spacing: -0.3px;
-  margin-top: 1.125rem;
-  margin-bottom: 2.875rem;
-`;
-
-export const ChannelUsers = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-weight: bold;
-  font-size: ${font(4)};
-  line-height: 1.35;
-  letter-spacing: -0.3px;
-`;
-
-export const ChannelTitle = styled.span`
- 
-  margin-bottom: 1.5rem;
-`;
-
-export const ChannelUser = styled.span`
-  display: flex;
-  color: ${color(`gray`)};
-  align-items: center;
-  margin-bottom: 2rem;
-`;
-
-export const UserName = styled.span``;

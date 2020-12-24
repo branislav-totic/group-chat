@@ -7,6 +7,7 @@ import {
   DescriptionInput,
   NameInput,
   Title,
+  Form,
   CreateButton,
 } from './CreateChannel.css';
 
@@ -31,7 +32,7 @@ const NewChannel = ({
     alert(nameChannel + ` ` + nameDesc);
   };
 
-  const handleClodeModal = (e) => {
+  const handleCloseModal = (e) => {
     if((e.key === "Escape" || e.keyCode === 27) && isModalOpen) {
       setIsModalOpen(false)
       setNameChannel('');
@@ -42,10 +43,14 @@ const NewChannel = ({
   return (
     <Container
       isVisible={isModalOpen}
-      onKeyDown={handleClodeModal}
+      onKeyDown={handleCloseModal}
+      tabIndex="0"
     >
-      <Title>NEW CHANNEL</Title>
-      <form onSubmit={handleSubmit}>
+      <Form
+        onSubmit={handleSubmit}
+        isVisible={isModalOpen}
+      >
+        <Title>NEW CHANNEL</Title>
         <NameInput
           placeholder='Channel name'
           ref={nameRef}
@@ -62,7 +67,7 @@ const NewChannel = ({
           rows="3"
         />
         <CreateButton>Save</CreateButton>
-      </form>
+      </Form>
     </Container>
   );
 };
