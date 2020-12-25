@@ -93,6 +93,7 @@ export const AddNew = styled.span`
     box-shadow: 0px 0px 0px 1px white;
     transform: scale(1.05);
   }
+  
   ${({ isOpen }) => isOpen && css`
     svg {
       transform: rotate(135deg);
@@ -250,7 +251,7 @@ export const FooterDrawer = styled.div`
   width: max-content;
   top: 0.5rem;
   left: 3rem;
-  transform: translate(-100%, 0);
+  transform: translate(-100%, -50%);
   background-color: ${color(`black-medium`)};
   padding: 1rem;
   border-radius: 0.5rem;
