@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-const roomSchema = Schema({
+const roomSchema = new mongoose.Schema({
   name: { type: String, require },
   desc: String,
   password: String,

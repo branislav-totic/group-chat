@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-const roomsMembersSchema = Schema({
+const roomsMembersSchema = new mongoose.Schema({
   roomID: String,
   userID: String,
 });
 
-const RoomsMembers = mongoose.model('RoomsMembers', roomsMembersSchema);
+const RoomsMembers = mongoose.model('Rooms_Members', roomsMembersSchema);
 
 module.exports = RoomsMembers;
