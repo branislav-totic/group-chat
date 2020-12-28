@@ -1,33 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { ReactComponent as PlusSVG } from '../../assets/images/plus.svg';
-import { ReactComponent as DownArrowSVG } from '../../assets/images/down-arrow.svg';
 import { AppContext } from '..';
 import ChannelDrawer from './ChannelsDrawer/ChannelDrawer';
 
 
 import {
   AddNew,
+  ChannelHeader,
   ChannelIcon,
   ChannelName,
   ChannelWrapper,
   ChannelsWrapper,
   Container,
   ContentWrapper,
+  DefaultUserIcon,
+  DownArrowIcon,
+  FoooterDrawerItem,
   Footer,
+  FooterDrawer,
   FooterDropdown,
   FooterWrapper,
   Header,
   HeaderWrapper,
+  LogoutIcon,
+  MainHeader,
+  PlusIcon,
   Search,
   SearchIcon,
   SearchWrapper,
   UserIcon,
-  ChannelHeader,
-  MainHeader,
-  FooterDrawer,
-  FoooterDrawerItem,
+  Divider,
 } from './Channels.css';
 
 //change with real data
@@ -62,11 +65,11 @@ const Channels = ({
             onClick={handleAddNew}
             isOpen={isModalOpen}
           >
-            <PlusSVG/>
+            <PlusIcon/>
           </AddNew>
         </MainHeader>
         <ChannelHeader isVisible={activeChannel}>
-          <DownArrowSVG onClick={handleReturnToGlobal} />
+          <DownArrowIcon onClick={handleReturnToGlobal} />
           {`All channels`}
         </ChannelHeader>
       </HeaderWrapper>
@@ -79,10 +82,11 @@ const Channels = ({
         <UserIcon image="assets/images/3b9735f2ac6ac459b44dd6fa1b8a771b.png" />
         <Footer>Xanthe Neal</Footer>
         <FooterDropdown>
-          <DownArrowSVG />
+          <DownArrowIcon />
           <FooterDrawer>
-            <FoooterDrawerItem>My Profile</FoooterDrawerItem>
-            <FoooterDrawerItem>Logout</FoooterDrawerItem>
+            <FoooterDrawerItem><DefaultUserIcon />My Profile</FoooterDrawerItem>
+            <Divider />
+            <FoooterDrawerItem isLogout><LogoutIcon />Logout</FoooterDrawerItem>
           </FooterDrawer>
         </FooterDropdown>
       </FooterWrapper>

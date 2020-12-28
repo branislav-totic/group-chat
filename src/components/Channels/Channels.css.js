@@ -1,9 +1,19 @@
 import styled, { css } from 'styled-components/macro';
 import { colors, sizing, util } from '../../style';
+import { ReactComponent as PlusSVG } from '../../assets/images/plus.svg';
+import { ReactComponent as DownArrowSVG } from '../../assets/images/down-arrow.svg';
+import { ReactComponent as LogoutSVG } from '../../assets/images/exit.svg';
+import { ReactComponent as UserSVG } from '../../assets/images/user.svg';
 
 const { Input, ScrollBar } = util;
 const { color } = colors;
 const { font } = sizing;
+
+
+export const PlusIcon = styled(PlusSVG)``;
+export const DownArrowIcon = styled(DownArrowSVG)``;
+export const LogoutIcon = styled(LogoutSVG)``;
+export const DefaultUserIcon = styled(UserSVG)``;
 
 export const Container = styled.aside`
   background: ${color(`black`)};
@@ -50,7 +60,7 @@ export const ChannelHeader = styled.div`
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
 
-  svg {
+  ${DownArrowIcon} {
     fill: ${color(`white`)};
     transform: rotate(90deg);
     margin-right: 10px;
@@ -76,7 +86,7 @@ export const AddNew = styled.span`
   box-shadow: 0px 0px 0px 1px transparent;
   transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 
-  svg {
+  ${PlusIcon} {
     height: 14px;
     width: 14px;
     stroke-width: 2px;
@@ -95,7 +105,7 @@ export const AddNew = styled.span`
   }
   
   ${({ isOpen }) => isOpen && css`
-    svg {
+    ${PlusIcon} {
       transform: rotate(135deg);
     }
   `}
@@ -261,6 +271,8 @@ export const FooterDrawer = styled.div`
 `;
 
 export const FoooterDrawerItem  = styled.div`
+  display: flex;
+  align-content: center;
   cursor: pointer;
   padding: 0.75rem;
   padding-right: 2.5rem; 
@@ -269,24 +281,39 @@ export const FoooterDrawerItem  = styled.div`
   &:hover {
     background-color: ${color(`black-light`)};
   }
+
+  svg {
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-right: 0.5rem;
+  }
+
+  ${({ isLogout })=> isLogout && css`
+    color: #EB5757;
+
+    svg {
+      fill: #EB5757;
+    }
+  `}
 `;
 
 export const FooterDropdown = styled.span`
+  cursor: pointer;
   display: flex;
   align-items: center;
   margin-left: auto;
   position: relative;
   height: 100%;
-  width: 3.125rem;
+  width: 2rem;
   justify-content: flex-end;
 
-  svg {
+  ${DownArrowIcon} {
     transition: transform 0.2s ease-in-out;
     fill: ${color(`white`)};
   }
 
   &:hover {
-    svg {
+    ${DownArrowIcon} {
       transform: rotate(180deg);
     }
 
@@ -297,3 +324,11 @@ export const FooterDropdown = styled.span`
     }
   }
 `;
+
+ export const Divider = styled.span`
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: ${color(`black-light`)};
+  margin: 0.5rem 0;
+ `;
