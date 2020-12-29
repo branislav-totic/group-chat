@@ -1,11 +1,17 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 const db = require("../db");
+
 const Message = require("../models/Message");
 const Room = require("../models/Room");
 const User = require("../models/User");
 const RoomsMembers = require("../models/RoomsMembers");
 
+const secret = process.env.TOKEN_CODE || "secret";
 const router = express.Router();
+const verifyToken = require("../helpers/verifyToken");
 
 router.route("/").get((req, res, next) => {
   // res.setHeader("Content-Type", "application/json");
@@ -18,41 +24,54 @@ router.route("/").get((req, res, next) => {
   });
 });
 
+////////
 // Login
-router.route("/login").get(async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    
-    let user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ error: "Invalid email" });
+router.route("/login").get((req, res) => {
+  const { email, password } = req.body;
+  console.log(req.body)
+  User.findOne({ email })
+    .then((data) => {
+      const isMatch = bcrypt.compareSync(password, data.password);
+      if (!isMatch) res.status(500).json("Invalid password");
 
-    user = await User.findOne({ password });
-    if (!user) return res.status(400).json({ error: "Invalid password" });
+      const token = jwt.sign({ email }, secret, { expiresIn: '1h' });
 
-    user = await User.findOne({  email, password }, { password: false, __v: false });
-    res.status(200).json(user);
-
-  } catch (err) {
-    res.status(500).json(err)
-  };
+      const user = {
+        _id: data._id,
+        username: data.username,
+        email: data.email,
+        token
+      }
+      res.status(200).json(user);
+    })
+    .catch((err) => {
+      res.status(500).json("Invalid email or password");
+    })
 });
 
+//////////////
 // Create user
-router.route("/user").post((req, res) => {
-  // const salt = await bcrypt.genSalt(10);
-  // user.password = await bcrypt.hash(user.password, salt);
-  new User(req.body)
+router.route("/user").post(verifyToken, (req, res) => {
+  const { email, password, username } = req.body;
+  const hashPass = bcrypt.hashSync(password, 10);
+  
+  new User({
+    username,
+    email,
+    password: hashPass,
+  })
   .save()
   .then(data => {
-    res.status(201);
+    res.sendStatus(201);
   })
   .catch(err => {
     res.status(500).json(err);
   });
 });
  
+//////////////
 // Update user
-router.route("/user:id").post((req, res, next) => {
+router.route("/user:id").post(verifyToken, (req, res) => {
   const user_id = req.params.id;
   
   new User(req.body)
@@ -65,9 +84,11 @@ router.route("/user:id").post((req, res, next) => {
   });
 });
 
+///////////////////////////
 // Get All Messages in Room
-router.route("/message").get((req, res) => {
+router.route("/message").get(verifyToken, (req, res) => {
   const { roomID } = req.body
+
   Message.find({ roomID }, { _id: false, __v: false })
   .then(data => {
     res.status(200).json(data);
@@ -77,8 +98,9 @@ router.route("/message").get((req, res) => {
   });
 });
 
+//////////////////
 // Add new Message
-router.route("/message").post((req, res) => {
+router.route("/message").post(verifyToken, (req, res) => {
   new Message(req.body)
   .save()
   .then(data => {
@@ -89,9 +111,9 @@ router.route("/message").post((req, res) => {
   });
 });
 
-
+//////////////////
 // Create new Room
-router.route("/room").post((req, res) => {
+router.route("/room").post(verifyToken, (req, res) => {
   new Room(req.body)
   .save()
   .then(data => {
@@ -102,9 +124,9 @@ router.route("/room").post((req, res) => {
   });
 });
 
-
+///////////////////
 // Set User to Room
-router.route("/rooms").post((req, res) => {
+router.route("/rooms").post(verifyToken, (req, res) => {
   new RoomsMembers(req.body)
   .save()
   .then(data => {
@@ -115,8 +137,9 @@ router.route("/rooms").post((req, res) => {
   });
 });
 
+////////////////////////
 // Get All Users in Room
-router.route("/rooms").get(async (req, res) => {
+router.route("/rooms").get(verifyToken, async (req, res) => {
   try {
     const { roomID } = req.body;
 
@@ -134,9 +157,11 @@ router.route("/rooms").get(async (req, res) => {
   }
 });
 
+/////////////////////////
 // Get all Rooms for User
-router.route("/rooms-members").get(async (req, res) => {
+router.route("/rooms-members").get(verifyToken, (req, res) => {
   const { userID } = req.body;
+
   Room.find({ userID })
   .then(data => {
     res.sendStatus(201);  

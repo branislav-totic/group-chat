@@ -14,13 +14,22 @@ import {
 
 //change data with real content
 import data from '../App/data.json'
+import { login } from '../../api/login'
 
 const Login = ({ setUser }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { elements } = e.target;
 
+    const formData = {
+      email: elements.email.value,
+      password: elements.password.value
+    };
+
+    const response = login(formData);
+    console.log(response)
     // set user on login
-    setUser(data.user);
+    // setUser(data.user);
     // fetch("http://127.0.0.1:3001/user")
     //   .then((data) => data.json())
     //   .then(
@@ -38,8 +47,8 @@ const Login = ({ setUser }) => {
       <FormWrapper>
         <Header>Login</Header>
         <Form onSubmit={handleSubmit}>
-          <Input placeholder="Email"></Input>
-          <Input placeholder="Password" type="password"></Input>
+          <Input placeholder="Email" name="email"></Input>
+          <Input placeholder="Password" type="password" name="password"></Input>
           <Submit type="submit">Login</Submit>
         </Form>
 
