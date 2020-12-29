@@ -192,6 +192,12 @@ export const ChannelsWrapper = styled.div`
   `}
 `;
 
+export const ChannelName = styled.span`
+  display: flex;
+  text-transform: uppercase;
+  font-weight: bold;
+`;
+
 export const ChannelWrapper = styled.div`
   display: flex;
   margin-bottom: 1.25rem;
@@ -200,6 +206,12 @@ export const ChannelWrapper = styled.div`
 
   &:last-of-type {
     margin-bottom: 0;
+  }
+
+  &:hover {
+    ${ChannelName} {
+      color: #747474;
+    }
   }
 `;
 
@@ -216,12 +228,6 @@ export const ChannelIcon = styled.span`
   justify-content: center;
   font-weight: bold;
   margin-right: 0.75rem;
-`;
-
-export const ChannelName = styled.span`
-  display: flex;
-  text-transform: uppercase;
-  font-weight: bold;
 `;
 
 export const FooterWrapper = styled.div`
