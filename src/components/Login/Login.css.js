@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 import { util, colors } from '../../style';
 
 const { Button, Link, Input: OriginalInput } = util;
@@ -17,6 +17,7 @@ export const Header = styled.h2`
 `;
 
 export const FormWrapper = styled.div`
+  position: relative;
   border-radius: 24px;
   border: 1px solid ${color(`gray-light`)};
   box-sizing: border-box;
@@ -25,6 +26,18 @@ export const FormWrapper = styled.div`
   max-width: 475px;
   padding: 3.75rem;
   width: 100%;
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.3s ease-in-out;
+
+  ${({ isHidden }) => isHidden && css`
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+  `}
 `;
 
 export const Form = styled.form`

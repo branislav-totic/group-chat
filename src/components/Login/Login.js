@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from 'react';
 import PropTypes from 'prop-types'
-import { AppContext } from "..";
+import { AppContext } from '..';
+import NewUser from './NewUser/NewUser';
 import {
   Container,
   Footer,
@@ -10,52 +11,58 @@ import {
   FormWrapper,
   RegisterLink,
   Submit,
-} from "./Login.css";
+  Wrapper,
+} from './Login.css';
 
 //change data with real content
-import data from '../App/data.json'
 import { login } from '../../api/login'
 
 const Login = ({ setUser }) => {
-  const handleSubmit = (e) => {
+
+  const [registerPageClosed, setRegisterPageClosed] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { elements } = e.target;
+    const { email, password } = e.target.elements;
 
     const formData = {
-      email: elements.email.value,
-      password: elements.password.value
+      email: email.value,
+      password: password.value
     };
 
-    const response = login(formData);
-    console.log(response)
-    // set user on login
-    // setUser(data.user);
-    // fetch("http://127.0.0.1:3001/user")
-    //   .then((data) => data.json())
-    //   .then(
-    //     (data) => {
-    //       console.log(data);
-    //     },
-    //     (error) => {
-    //       console.log(error);
-    //     }
-    //   );
+    const user = await login(formData)
+    let data = sessionStorage.getItem('token')
+    console.log(user, data)
+    setUser(user)
   };
+
+  const handleRegisterLinkClick = (e) => {
+    e.preventDefault()
+    setRegisterPageClosed((prevState)=> !prevState)
+  }
 
   return (
     <Container>
       <FormWrapper>
-        <Header>Login</Header>
-        <Form onSubmit={handleSubmit}>
-          <Input placeholder="Email" name="email"></Input>
-          <Input placeholder="Password" type="password" name="password"></Input>
-          <Submit type="submit">Login</Submit>
-        </Form>
+        <Wrapper isHidden={registerPageClosed}>
+          <Header>Login</Header>
+          <Form onSubmit={handleSubmit}>
+            <Input placeholder="Email" name="email"></Input>
+            <Input placeholder="Password" type="password" name="password"></Input>
+            <Submit type="submit">Login</Submit>
+          </Form>
 
-        <Footer>
-          {`Don’t have an account yet? `}
-          <RegisterLink href="https://google.com">Register</RegisterLink>
-        </Footer>
+          <Footer>
+            {`Don’t have an account yet? `}
+            <RegisterLink href={``} onClick={handleRegisterLinkClick}>Register</RegisterLink>
+          </Footer>
+        </Wrapper>
+        <Wrapper isHidden={!registerPageClosed}>
+          <NewUser
+            setUser={setUser}
+            handleRegisterLinkClick={handleRegisterLinkClick}
+          />
+        </Wrapper>
       </FormWrapper>
     </Container>
   );

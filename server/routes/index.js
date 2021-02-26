@@ -26,9 +26,9 @@ router.route("/").get((req, res, next) => {
 
 ////////
 // Login
-router.route("/login").get((req, res) => {
+router.route("/login").post((req, res) => {
   const { email, password } = req.body;
-  console.log(req.body)
+  
   User.findOne({ email })
     .then((data) => {
       const isMatch = bcrypt.compareSync(password, data.password);
