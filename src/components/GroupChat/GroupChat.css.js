@@ -17,7 +17,7 @@ export const Root = styled.div`
     bottom: 0;
     background-color: ${color(`white`)};
     opacity: 0;
-    
+
     ${({ modalOpen }) => modalOpen && css`
       content: "";
       transition: opacity 0.3s ease-in-out;

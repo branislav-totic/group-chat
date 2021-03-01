@@ -9,7 +9,7 @@ const MessagesInput = ({
   setMessages,
 }) => {
   const [message, setMessage] = useState(``);
-  
+
 
   const handleInputSend = (e) => {
     if (e.key === `Enter` || e.keyCode === 13) {
@@ -27,7 +27,7 @@ const MessagesInput = ({
       message: convertedMsg,
       time: new Date().getTime()
     };
-    
+
     setMessages((messages) => ([ newMsg, ...messages ]));
     setMessage(``);
   };

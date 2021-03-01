@@ -39,7 +39,7 @@ export const MainHeader = styled.div`
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
-  
+
   ${({ isVisible }) => isVisible && css`
     visibility: visible;
     opacity: 1;
@@ -103,7 +103,7 @@ export const AddNew = styled.span`
     box-shadow: 0px 0px 0px 1px white;
     transform: scale(1.05);
   }
-  
+
   ${({ isOpen }) => isOpen && css`
     ${PlusIcon} {
       transform: rotate(135deg);
@@ -281,9 +281,9 @@ export const FoooterDrawerItem  = styled.div`
   align-content: center;
   cursor: pointer;
   padding: 0.75rem;
-  padding-right: 2.5rem; 
+  padding-right: 2.5rem;
   border-radius: 0.5rem;
-  
+
   &:hover {
     background-color: ${color(`black-light`)};
   }

@@ -28,7 +28,7 @@ router.route("/").get((req, res, next) => {
 // Login
 router.route("/login").post((req, res) => {
   const { email, password } = req.body;
-  
+
   User.findOne({ email })
     .then((data) => {
       const isMatch = bcrypt.compareSync(password, data.password);
@@ -54,7 +54,7 @@ router.route("/login").post((req, res) => {
 router.route("/user").post(verifyToken, (req, res) => {
   const { email, password, username } = req.body;
   const hashPass = bcrypt.hashSync(password, 10);
-  
+
   new User({
     username,
     email,
@@ -68,12 +68,12 @@ router.route("/user").post(verifyToken, (req, res) => {
     res.status(500).json(err);
   });
 });
- 
+
 //////////////
 // Update user
 router.route("/user:id").post(verifyToken, (req, res) => {
   const user_id = req.params.id;
-  
+
   new User(req.body)
   .save()
   .then(data => {
@@ -117,7 +117,7 @@ router.route("/room").post(verifyToken, (req, res) => {
   new Room(req.body)
   .save()
   .then(data => {
-    res.sendStatus(201);  
+    res.sendStatus(201);
   })
   .catch(err => {
     res.status(500).json(err);
@@ -130,7 +130,7 @@ router.route("/rooms").post(verifyToken, (req, res) => {
   new RoomsMembers(req.body)
   .save()
   .then(data => {
-    res.sendStatus(201);  
+    res.sendStatus(201);
   })
   .catch(err => {
     res.status(500).json(err);
@@ -144,7 +144,7 @@ router.route("/rooms").get(verifyToken, async (req, res) => {
     const { roomID } = req.body;
 
     let usersID = await RoomsMembers.find({ roomID }, { userID: true, _id: false });
-    
+
     let parsedUsersID = [];
     usersID.map(user=> parsedUsersID.push(user.userID));
 
@@ -164,7 +164,7 @@ router.route("/rooms-members").get(verifyToken, (req, res) => {
 
   Room.find({ userID })
   .then(data => {
-    res.sendStatus(201);  
+    res.sendStatus(201);
   })
   .catch(err => {
     res.status(500).json(err);

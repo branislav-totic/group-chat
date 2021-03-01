@@ -8,7 +8,7 @@ const GroupChat = ({
   isModalOpen,
 }) => {
   return (
-    <Root 
+    <Root
       modalOpen={isModalOpen}
     >
       <CreateChannel/>

@@ -19,7 +19,7 @@ const NewChannel = ({
   const [nameChannel, setNameChannel] = useState('');
   const [nameDesc, setNameDesc] = useState('');
 
-  useEffect(() => { 
+  useEffect(() => {
     if (isModalOpen) {
       setTimeout(() => {
         nameRef.current.focus();
@@ -83,7 +83,7 @@ const NewChannelProvider = (props) => {
 };
 
 NewChannel.propTypes = {
-  isModalOpen: PropTypes.bool, 
+  isModalOpen: PropTypes.bool,
   setIsModalOpen: PropTypes.func,
 }
 

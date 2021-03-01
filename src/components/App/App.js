@@ -11,7 +11,7 @@ const AppProvider = () => {
   const [user, setUser] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeChannel, setActiveChannel] = useState(``)
-  
+
   const context = {
     user,
     setUser,

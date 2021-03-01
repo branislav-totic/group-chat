@@ -28,7 +28,7 @@ const MessagesBox = ({
     const getTime = `${String(comparedTime.getHours()).padStart(2, '0')}:${String(comparedTime.getMinutes()).padStart(2, '0')}`;
 
     const isThisMonth = comparedTime.getMonth() === today.getMonth() && comparedTime.getFullYear() === today.getFullYear();
-    
+
     let newDate;
 
     if (isThisMonth && getDate === today.getDate()) {
@@ -51,7 +51,7 @@ const MessagesBox = ({
         <IconWrapper>
           <Icon src={userAvatar}/>
         </IconWrapper>
-        <MessageContent> 
+        <MessageContent>
           <MessageInfo>{userName}<span>{formatedTime}</span></MessageInfo>
           <Message>{message}</Message>
         </MessageContent>
@@ -73,17 +73,17 @@ const MessagesBox = ({
       const formatedTime = formatDate(time);
       let formatedDateNext;
       let shouldRenderBreake = false;
-      
+
       const splitedTime = formatedTime.split(' ');
       const formatedDate = splitedTime.length > 2 ? `${splitedTime[0]} ${splitedTime[1]}` : splitedTime[0];
       printedTime = formatedDate;
-      
+
       if (messages.length !== index + 1) {
         const formatedTimeNext = formatDate(messages[index + 1].time);
         const splitedTimeNext = formatedTimeNext.split(' ');
         formatedDateNext = splitedTimeNext.length > 2 ? `${splitedTimeNext[0]} ${splitedTimeNext[1]}` : splitedTimeNext[0];
       }
-      
+
       if (formatedDateNext && printedTime && printedTime !== formatedDateNext) {
         shouldRenderBreake = true;
       }
