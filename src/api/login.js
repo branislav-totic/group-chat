@@ -4,37 +4,40 @@ const BACKEND_URL = `http://localhost:${port}`;
 
 export const login = (loginData = {}) => {
   return axios.post(`${BACKEND_URL}/login`, loginData)
-    .then((data)=>{
-      setToken(data.data.token)
+    .then(({ data: { token, username, email } }) => {
+      setToken(token)
       return {
-        username: data.data.username,
-        email: data.data.email,
+        username,
+        email,
       }
     })
-    .catch((err)=>err);
+    .catch((err) => err);
 }
 
-export const loginOut = () => {
+export const logout = () => {
   setToken(null);
 }
 
 export const createUser = async (data = {}) => {
   console.log(data)
   return await axios.post(`${BACKEND_URL}/user`, data)
-    .then((data)=>data.data)
-    .then((data)=>data.json())
-    .catch((err)=>err);
+    .then((data) => data.data)
+    .then((data) => data.json())
+    .catch((err) => err);
 }
 
 const setToken = (token) => {
-  if (sessionStorage.getItem('authtoken')) {
-    sessionStorage.removeItem('authtoken');
+  if (sessionStorage.getItem('authtoken-chat')) {
+    sessionStorage.removeItem('authtoken-chat');
   }
-  sessionStorage.setItem('authtoken', token);
+  sessionStorage.setItem('authtoken-chat', token);
 }
 
 export const checkIfTokenExpierd = () => {
-  setInterval(()=>{
+  setInterval(() => {
 
   }, 30000)
 }
+
+// axios.defaults.headers.post['header1'] = 'value'  for POST requests
+// axios.defaults.headers.common['header1'] = 'value'  for all requests

@@ -41,6 +41,7 @@ const Channels = ({
   isModalOpen,
   activeChannel,
   setActiveChannel,
+  currentUser,
 }) => {
   const [channels, setChannels] = useState([]);
 
@@ -80,7 +81,7 @@ const Channels = ({
     return (
       <FooterWrapper>
         <UserIcon image="assets/images/3b9735f2ac6ac459b44dd6fa1b8a771b.png" />
-        <Footer>Xanthe Neal</Footer>
+        <Footer>{currentUser.username}</Footer>
         <FooterDropdown>
           <DownArrowIcon />
           <FooterDrawer>

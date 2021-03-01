@@ -11,7 +11,10 @@ const { font } = sizing;
 
 
 export const PlusIcon = styled(PlusSVG)``;
-export const DownArrowIcon = styled(DownArrowSVG)``;
+export const DownArrowIcon = styled(DownArrowSVG)`
+    border: 1px solid white;
+    border-radius: 50%;
+`;
 export const LogoutIcon = styled(LogoutSVG)``;
 export const DefaultUserIcon = styled(UserSVG)``;
 
@@ -324,7 +327,7 @@ export const FooterDropdown = styled.span`
     }
 
     ${FooterDrawer} {
-      transform: translate(-100%, -100%);
+      transform: translate(-100%, -105%);
       opacity: 1;
       visibility: visible;
     }

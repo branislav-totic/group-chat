@@ -8,13 +8,13 @@ export const AppContext = createContext();
 
 const AppProvider = () => {
   // const [loadClient, setLoadClient] = useState(true);
-  const [user, setUser] = useState(false);
+  const [currentUser, setCurrentUser] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeChannel, setActiveChannel] = useState(``)
 
   const context = {
-    user,
-    setUser,
+    currentUser,
+    setCurrentUser,
     isModalOpen,
     setIsModalOpen,
     activeChannel,
@@ -24,7 +24,7 @@ const AppProvider = () => {
   return (
     <AppContext.Provider value={context}>
       <Container>
-        {!user ? <Login setUser={setUser} /> : <GroupChat user={user}/>}
+        {!currentUser ? <Login setCurrentUser={setCurrentUser} /> : <GroupChat currentUser={currentUser}/>}
       </Container>
     </AppContext.Provider>
     // <>

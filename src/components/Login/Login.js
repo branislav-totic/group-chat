@@ -17,7 +17,7 @@ import {
 //change data with real content
 import { login } from '../../api/login'
 
-const Login = ({ setUser }) => {
+const Login = ({ setCurrentUser }) => {
 
   const [registerPageClosed, setRegisterPageClosed] = useState(false);
 
@@ -31,9 +31,7 @@ const Login = ({ setUser }) => {
     };
 
     const user = await login(formData)
-    let data = sessionStorage.getItem('token')
-    console.log(user, data)
-    setUser(user)
+    setCurrentUser(user)
   };
 
   const handleRegisterLinkClick = (e) => {
@@ -59,7 +57,7 @@ const Login = ({ setUser }) => {
         </Wrapper>
         <Wrapper isHidden={!registerPageClosed}>
           <NewUser
-            setUser={setUser}
+            setCurrentUser={setCurrentUser}
             handleRegisterLinkClick={handleRegisterLinkClick}
           />
         </Wrapper>
@@ -71,15 +69,15 @@ const Login = ({ setUser }) => {
 const LoginProvider = () => {
   return (
     <AppContext.Consumer>
-      {({setUser}) => {
-        return <Login setUser={setUser} />;
+      {({setCurrentUser}) => {
+        return <Login setCurrentUser={setCurrentUser} />;
       }}
     </AppContext.Consumer>
   );
 };
 
 Login.propTypes = {
-	setUser: PropTypes.func,
+	setCurrentUser: PropTypes.func,
 };
 
 export default LoginProvider;

@@ -12,7 +12,7 @@ import {
   Submit,
 } from '../Login.css';
 
-const NewUser = ({setUser, handleRegisterLinkClick}) => {
+const NewUser = ({setCurrentUser, handleRegisterLinkClick}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,11 +25,11 @@ const NewUser = ({setUser, handleRegisterLinkClick}) => {
     };
 
     console.log(formData)
-    // setUser('data.user')
+    // setCurrentUser('data.user')
     // const response = login(formData);
     // console.log(response)
     // set user on login
-    // setUser(data.user);
+    // setCurrentUser(data.user);
     // fetch("http://127.0.0.1:3001/user")
     //   .then((data) => data.json())
     //   .then(
